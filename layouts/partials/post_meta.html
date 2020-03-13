@@ -17,9 +17,9 @@
         {{ $name := default .Identifier .Name }}
         {{ $link := default .Identifier .URL }}
   <span{{ if .Title }} title="{{ .Title }}"{{ end }}>{{ $name }}</span> &#x5b;
-        {{- range $taxo }}
+        {{- range $i, $e := $taxo }}
           {{- $perma := lower (path.Join $link (urlize .)) }}
-    <a href="{{ $perma | relURL }}">{{ . }}</a>
+    {{if $i}}, {{end}}<a href="{{ $perma | relURL }}">{{ . }}</a>
         {{- end }}
   &#x5d;
       {{- end }}
