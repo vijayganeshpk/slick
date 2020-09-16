@@ -32,18 +32,18 @@
   {{- end }}
   {{ "<!--[if lte IE 8]>" | safeHTML }}
   {{- $styleCompat := resources.Get "style-compat.css" | resources.Fingerprint }}
-  <link rel="preload" as="style" href="{{ $styleCompat.RelPermalink }}" />
+  <link rel="stylesheet preload" as="style" href="{{ $styleCompat.RelPermalink }}" />
   {{ "<![endif]-->" | safeHTML }}
   {{ "<!--[if gt IE 8]><!-->" | safeHTML }}
   {{- $style := resources.Get "style.css" | resources.Fingerprint }}
-  <link rel="preload" as="style" href="{{ $style.RelPermalink }}" />
+  <link rel="stylesheet preload" as="style" href="{{ $style.RelPermalink }}" />
   {{ "<!--<![endif]-->" | safeHTML }}
   {{- with .Site.Params.css }}
   {{- if resources.Get . }}
   {{- $styleCustom := resources.Get . | resources.Fingerprint }}
-  <link rel="preload" as="style" href="{{ $styleCustom.RelPermalink }}" />
+  <link rel="stylesheet preload" as="style" href="{{ $styleCustom.RelPermalink }}" />
   {{- else if fileExists (path.Join "static" .) }}
-  <link rel="preload" as="style" href="{{ $.Site.BaseURL }}{{ . }}" />
+  <link rel="stylesheet preload" as="style" href="{{ $.Site.BaseURL }}{{ . }}" />
   {{- end }}
   {{- end }}
   {{- $script := resources.Get "script.js" | resources.Fingerprint }}
