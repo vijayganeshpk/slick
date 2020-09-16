@@ -1,7 +1,5 @@
-import copier from 'rollup-plugin-copier';
 import cssdiscard from 'postcss-discard-comments';
 import cssimport from 'postcss-import';
-import cssprefixer from 'autoprefixer';
 import cssurl from 'postcss-url';
 import path from 'path';
 import postcss from 'rollup-plugin-postcss';
@@ -33,7 +31,6 @@ const assetStyle = (compat) => {
           cssurl({
             url: (asset) => path.relative('static', asset.url),
           }),
-          cssprefixer(),
           cssdiscard({
             removeAll: true,
           }),
@@ -41,21 +38,6 @@ const assetStyle = (compat) => {
         extract: true,
         minimize: !devel(),
         sourceMap: (devel() ? 'inline' : false),
-      }),
-      copier({
-        items: [{
-          src: 'node_modules/purecss/LICENSE',
-          dest: 'static/assets/license-purecss',
-        }, {
-          src: 'node_modules/source-code-pro/LICENSE.md',
-          dest: 'static/assets/license-source-code-pro.md',
-        }, {
-          src: 'node_modules/source-sans-pro/LICENSE.md',
-          dest: 'static/assets/license-source-sans-pro.md',
-        }, {
-          src: 'node_modules/source-serif-pro/LICENSE.md',
-          dest: 'static/assets/license-source-serif-pro.md',
-        }],
       }),
     ],
   };
